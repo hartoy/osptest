@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+
 import {
   NavbarButtons,
   MobileNavbar,
@@ -12,6 +13,8 @@ import {
   NavContainer,
 } from './navbar-styles'
 import Icon from '../Icons'
+import { useAuthContext } from '../../authContext'
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
   const [click, setClick] = useState(false)
@@ -20,6 +23,9 @@ const Navbar = () => {
   const [deskMenuAbout, setDeskMenuAbout] = useState(false)
   const [deskMenuExplore, setDeskMenuExplore] = useState(false)
   const [navColor, setNavColor] = useState(false)
+  const { logout } = useAuthContext()
+  const { userData } = useAuthContext()
+  const navigate = useNavigate()
 
   const changeColor = () => {
     if (window.scrollY >= 60) {
@@ -48,6 +54,17 @@ const Navbar = () => {
     const button = document.getElementById('exploreAbout')
     aboutExpand ? (button.style.background = '') : (button.style.background = 'rgb(210, 224, 237)')
     aboutExpand ? (button.style.height = '63px') : (button.style.height = '1113px')
+  }
+
+  const goTomenu = () => {
+    navigate('/login')
+    setClick(!click)
+  }
+
+  const logOut = () => {
+    logout()
+    navigate('/login')
+    setClick(!click)
   }
 
   return (
@@ -122,7 +139,7 @@ const Navbar = () => {
                     <li>Team</li>
                     <li>Jobs</li>
                     <li>
-                      <h3>Contact:</h3> <span>analytics@gmail.com</span>{' '}
+                      <h3>Contact:</h3> <span>analytics@gmail.com</span>
                     </li>
                   </ul>
                   <ul>
@@ -141,9 +158,18 @@ const Navbar = () => {
                 </AboutMenu>
               </li>
             </ul>
-            <button>
-              <Icon name="NavbarMan" height="18px" marginRight="5px" /> LOGIN
-            </button>
+
+            {userData !== undefined ? (
+              <button>
+                <Icon name="NavbarMan" height="18px" marginRight="5px" onClick={() => logOut()} />
+                LOGOUT
+              </button>
+            ) : (
+              <button>
+                <Icon name="NavbarMan" height="18px" marginRight="5px" onClick={() => goTomenu()} />
+                LOGIN
+              </button>
+            )}
           </MobileMenu>
         </MobileNavbar>
 
@@ -159,9 +185,17 @@ const Navbar = () => {
                   About
                 </li>
                 <li>
-                  <button>
-                    <Icon name="NavbarMan" height="18px" width="18px" marginRight="10px" /> LOGIN
-                  </button>
+                  {userData !== undefined ? (
+                    <button>
+                      <Icon name="NavbarMan" height="18px" width="18px" marginRight="10px" onClick={() => logOut()} />
+                      LOGOUT
+                    </button>
+                  ) : (
+                    <button>
+                      <Icon name="NavbarMan" height="18px" width="18px" marginRight="10px" onClick={() => goTomenu()} />
+                      LOGIN
+                    </button>
+                  )}
                 </li>
               </ul>
             </NavbarButtons>
@@ -214,9 +248,9 @@ const Navbar = () => {
                 <li>
                   <Icon name="ExploreAuthors" width="22px" height="22px" marginRight="10px" marginTop="18px" />
                   <p>
-                    Titles{' '}
+                    Titles
                     <span style={{ lineHeight: 1.2 }}>
-                      Track the frequency of keywords and concepts in the dataset over time.{' '}
+                      Track the frequency of keywords and concepts in the dataset over time.
                     </span>
                   </p>
                 </li>

@@ -6,6 +6,7 @@ import Search from '../Search/index'
 import Explore from '../Explore/index'
 import TableComp from '../Table/index'
 import imgHead from '../Head/header-bg.png'
+import { Link } from 'react-router-dom'
 
 const Revisions = () => {
   return (

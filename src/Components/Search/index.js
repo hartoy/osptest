@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+
 import { SearchStyles, MobileSearch, DeskSearch } from './search-styles'
 import Icon from '../Icons'
 import { RevisionsTitle } from '../Title/title-styles'
