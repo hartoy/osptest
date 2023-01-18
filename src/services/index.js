@@ -11,13 +11,18 @@ export const getDataSearch = async () => {
   return response.data
 }
 
-export const getWorkSearch = async () => {
-  let response = await Axios(`https://explorer-api.opensyllabus.org/v1/works.json?size=10`)
+export const getWorkSearch = async (config) => {
+  let response = await Axios(`https://os-analytics-api-dev.opensyllabus.org/titles/?format=json&size=10`, config)
   return response.data
 }
 
-export const getFieldSearch = async () => {
-  let response = await Axios(`https://explorer-api.opensyllabus.org/v1/fields.json?size=10`)
+export const getFieldSearch = async (config) => {
+  let response = await Axios(`https://os-analytics-api-dev.opensyllabus.org/fields/?format=json&size=10`, config)
+  return response.data
+}
+
+export const getSingletonTitleId = async (config, id) => {
+  let response = await Axios(`https://os-analytics-api-dev.opensyllabus.org/titles/${id}`, config)
   return response.data
 }
 

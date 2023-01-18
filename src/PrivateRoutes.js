@@ -20,7 +20,7 @@ export default function PrivateRoute() {
         setIsLoading(false)
       })
       .catch((err) => {
-        if (err.response.status === 401) {
+        if (err.response.status >= 401) {
           setIsLoading(false)
           console.log(err)
           logout()

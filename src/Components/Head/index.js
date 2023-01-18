@@ -12,7 +12,7 @@ const Head = (props) => {
       {props.secondText ? (
         <p>
           {props.secondText}
-          {props.button ? <button onClick={() => navigate('/')}>CREATE A FREE TRIAL ACCOUNT</button> : ''}
+          {props.button ? <button onClick={() => navigate('revisions')}>CREATE A FREE TRIAL ACCOUNT</button> : ''}
         </p>
       ) : (
         ''

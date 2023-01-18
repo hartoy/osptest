@@ -8,6 +8,7 @@ import Home from './Components/Pages/home'
 import Revisions from './Components/Pages/revisions'
 import LoginComp from './Components/Pages/login'
 import NotFoundComp from './Components/Pages/notfound'
+import SingletonPage from './Components/Pages/singleton'
 import PublicRoute from './PublicRoute'
 import PrivateRoute from './PrivateRoutes'
 import AuthContextProvider from './authContext'
@@ -21,11 +22,12 @@ function App() {
           <Routes>
             <Route element={<PublicRoute />}>
               <Route path="login" element={<LoginComp />} />
-              <Route index path="/" element={<Revisions />} />
+              <Route index path="/" element={<Home />} />
               <Route path="*" element={<NotFoundComp />} />
             </Route>
             <Route element={<PrivateRoute />}>
-              <Route path="home" element={<Home />} />
+              <Route path="revisions" element={<Revisions />} />
+              <Route path="singleton/:id" element={<SingletonPage />} />
             </Route>
           </Routes>
         </BrowserRouter>

@@ -42,16 +42,16 @@ const Login = (props) => {
               setUserData(response.data)
               console.log('entro desde login')
               setIsLoading(false)
-              navigate('/home')
+              navigate('/')
             })
             .catch((err) => {
-              if (err.response.status === 401) {
+              if (err.response.status >= 401) {
                 setIsLoading(false)
                 console.log(err)
                 logout()
               }
             })
-        } else if (resp.response.status === 401) {
+        } else if (resp.response.status >= 401) {
           setDenied(true)
         }
       })

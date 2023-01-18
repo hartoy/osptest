@@ -1,5 +1,9 @@
 import styled, { css } from 'styled-components'
 
+const ToSingleton = styled.a`
+  text-decoration: none;
+`
+
 const TableStyles = styled.div`
   margin-right: auto;
   margin-left: auto;
@@ -55,12 +59,12 @@ const TableItem = styled.li`
   box-sizing: border-box;
   padding: 3px 0px 14px 0px;
   border-radius: 5px;
-  width: 100%;
+  width: ${(props) => (props.widTh90 ? '90%' : '102%')};
 
   @media (min-width: 1000px) {
     display: flex;
     flex-direction: row;
-    width: 90%;
+    width: ${(props) => (props.widTh90 ? '90%' : '102%')};
     height: 80px;
     padding-bottom: 5px;
     align-items: ${(props) => (props.alingItems ? 'start' : '')};
@@ -242,4 +246,5 @@ export {
   DeskMarkers,
   Marker,
   TableButton,
+  ToSingleton,
 }

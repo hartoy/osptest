@@ -23,13 +23,13 @@ export default function AuthContextProvider({ children }) {
     }
     if (userData === undefined) {
       console.log('se esta validando el token en auth')
-      Axios.get(`${API_GENOSHA}/api/v1/auth/me`, config)
+      Axios.get(`${API_GENOSHA}api/v1/auth/me`, config)
         .then((response) => {
           setUserData(response.data)
           setIsLoading(false)
         })
         .catch((err) => {
-          if (err.response.status === 401) {
+          if (err.response.status >= 401) {
             setIsLoading(false)
             console.log(err)
             logout()

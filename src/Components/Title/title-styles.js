@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const Title = styled.h1`
   color: rgb(55, 117, 185);
@@ -16,7 +16,7 @@ const Title = styled.h1`
 
   ${(props) =>
     props.mobile &&
-    `
+    css`
       @media only screen and (max-width: 1000px) {
         display: block;
         font-size: 16px;
@@ -25,11 +25,11 @@ const Title = styled.h1`
 
   ${(props) =>
     props.desktop &&
-    `
+    css`
       @media only screen and (min-width: 1000px) {
         display: block;
-        font-size: 26px;
         font-size: ${(props) => (props.fontSizeSmall ? '20px' : '26px')};
+        line-height: ${(props) => (props.heightSingleton ? '26px' : '')};
       }
     `}
 `
