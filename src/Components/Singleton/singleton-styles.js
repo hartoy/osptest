@@ -152,10 +152,9 @@ const PrimaryTitle = styled.h1`
   line-height: 29px;
   color: #525b65;
   margin: 3px 0px 5px 0px;
-
-  @media (min-width: 1000px) {
-    display: none;
-  }
+  white-space: wrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 
   ${(props) =>
     props.desk &&
@@ -166,6 +165,7 @@ const PrimaryTitle = styled.h1`
         display: block;
         font-size: 42px;
         line-height: 46px;
+        width: 106%;
       }
     `}
 `

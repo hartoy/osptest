@@ -65,7 +65,7 @@ export default function SingletonBox() {
                 <TableButton primaryButton>Titles</TableButton>
               </Link>
               <PrimaryAuthor>{data.authors[0].display_name} </PrimaryAuthor>
-              <PrimaryTitle></PrimaryTitle>
+              <PrimaryTitle>{data.display_name.substring(0, 55)}</PrimaryTitle>
               <Text mobile style={{ color: '#3188D3' }}>
                 Multiple Editions
               </Text>
@@ -90,7 +90,7 @@ export default function SingletonBox() {
                 </PrimaryStats>
                 <PrimaryStats desk>
                   <PrimaryAuthor desk>{data.authors[0].display_name} </PrimaryAuthor>
-                  <PrimaryTitle desk>{data.display_name}</PrimaryTitle>
+                  <PrimaryTitle desk>{data.display_name.substring(0, 52)}</PrimaryTitle>
                   <Text style={{ color: '#3188D3' }}>Multiple Editions</Text>
                   <Line style={{ marginTop: '60px' }} />
                   <Deskstats>
