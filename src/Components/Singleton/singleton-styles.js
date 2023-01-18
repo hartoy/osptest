@@ -156,6 +156,10 @@ const PrimaryTitle = styled.h1`
   text-overflow: ellipsis;
   overflow: hidden;
 
+  @media (min-width: 1000px) {
+    display: none;
+  }
+
   ${(props) =>
     props.desk &&
     css`
