@@ -37,7 +37,7 @@ import {
 } from './singleton-styles'
 
 import { Title } from '../Title/title-styles'
-import asigmentImg from '../Singleton/singleton-asigment.jpg'
+import asigmentImg from '../Singleton/singleton-asigmentt.jpg'
 import asigmentMapImg from '../Singleton/singleton-map.jpg'
 import Icon from '../Icons'
 
