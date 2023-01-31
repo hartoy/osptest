@@ -20,7 +20,7 @@ const Revisions = () => {
       </Section>
       <Section special>
         <TableComp field />
-        <TableComp alignEnd marginMob />
+        <TableComp workTable alignEnd marginMob />
       </Section>
     </>
   )

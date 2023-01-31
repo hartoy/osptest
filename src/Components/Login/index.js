@@ -37,7 +37,7 @@ const Login = (props) => {
           const config = {
             headers: { Authorization: `Bearer ${token}` },
           }
-          Axios.get(`${API_GENOSHA}/api/v1/auth/me`, config)
+          Axios.get(`${API_GENOSHA}api/v1/auth/me`, config)
             .then((response) => {
               setUserData(response.data)
               console.log('entro desde login')

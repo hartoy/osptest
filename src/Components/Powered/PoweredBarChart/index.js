@@ -10,7 +10,6 @@ const data = [
     FineArts: 45,
     Education: 24,
     Other: 464,
-    amt: 1295,
   },
   {
     name: '2015',
@@ -19,7 +18,6 @@ const data = [
     FineArts: 85,
     Education: 31,
     Other: 276,
-    amt: 1220,
   },
   {
     name: '2016',
@@ -28,7 +26,6 @@ const data = [
     FineArts: 50,
     Education: 18,
     Other: 255,
-    amt: 1025,
   },
   {
     name: '2017',
@@ -37,7 +34,6 @@ const data = [
     FineArts: 25,
     Education: 17,
     Other: 224,
-    amt: 1339,
   },
   {
     name: '2018',
@@ -46,7 +42,6 @@ const data = [
     FineArts: 25,
     Education: 12,
     Other: 166,
-    amt: 820,
   },
 ]
 

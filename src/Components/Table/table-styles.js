@@ -2,6 +2,19 @@ import styled, { css } from 'styled-components'
 
 const ToSingleton = styled.a`
   text-decoration: none;
+  width: 100%;
+
+  @media (min-width: 1000px) {
+    width: 90%;
+  }
+
+  ${(props) =>
+    props.singleton &&
+    css`
+      @media only screen and (min-width: 1000px) {
+        width: 100%;
+      }
+    `}
 `
 
 const TableStyles = styled.div`
@@ -10,6 +23,7 @@ const TableStyles = styled.div`
   font-family: Roboto, sans-serif;
   display: flex;
   flex-direction: column;
+  width: 100%;
 
   @media (min-width: 1000px) {
     display: flex;
@@ -29,7 +43,7 @@ const Table = styled.ul`
   align-items: center;
   flex-direction: column;
   list-style: none;
-  margin: 0 auto;
+  margin: ${(props) => (props.singleton ? '' : '0 auto')};
   padding-inline-start: 0;
   width: 300px;
 
@@ -51,11 +65,20 @@ const Table = styled.ul`
         margin-top: 60px;
       }
     `}
+
+  ${(props) =>
+    props.singleton &&
+    css`
+      width: 100%;
+      @media only screen and (min-width: 1000px) {
+        box-shadow: none;
+      }
+    `}
 `
 const TableItem = styled.li`
   display: flex;
   background-color: ${(props) => (props.value % 2 === 0 ? '#F6F6F6' : 'white')};
-  height: 129px;
+  height: 140px;
   box-sizing: border-box;
   padding: 3px 0px 14px 0px;
   border-radius: 5px;
@@ -65,10 +88,20 @@ const TableItem = styled.li`
     display: flex;
     flex-direction: row;
     width: ${(props) => (props.widTh90 ? '90%' : '102%')};
-    height: 80px;
+    height: 100px;
     padding-bottom: 5px;
-    align-items: ${(props) => (props.alingItems ? 'start' : '')};
+    align-items: center;
   }
+
+  ${(props) =>
+    props.singleton &&
+    css`
+      @media only screen and (min-width: 1000px) {
+        justify-content: space-between;
+        align-items: center;
+        height: 75px;
+      }
+    `}
 `
 
 const Line = styled.div`
@@ -82,6 +115,12 @@ const Line = styled.div`
   @media (min-width: 1000px) {
     display: none;
   }
+
+  ${(props) =>
+    props.singleton &&
+    css`
+      margin-top: 0px;
+    `}
 `
 const NumberDiv = styled.div`
   display: flex;
@@ -99,20 +138,28 @@ const TableText = styled.div`
 `
 
 const ItemTitle = styled.h3`
-  font-weight: 400;
+  font-weight: ${(props) => (props.Bold ? '600' : '400')};
   font-size: 18px;
   line-height: 16px;
   color: #405063;
   margin-bottom: 5px;
-  text-overflow: ellipsis;
-  width: 200px;
-  white-space: nowrap;
-  overflow: hidden;
+  width: 205px;
 
   @media (min-width: 1000px) {
     font-size: 16px;
     width: 270px;
   }
+  ${(props) =>
+    props.singleton &&
+    css`
+      margin-bottom: 5px;
+      margin-top: 10px;
+      line-height: 18px;
+      @media only screen and (min-width: 1000px) {
+        margin-bottom: 0px;
+        margin-top: 10px;
+      }
+    `}
 `
 
 const ItemSpan = styled.span`
@@ -146,6 +193,15 @@ const TableNumber = styled.span`
       color: ${(props) => (props.blue ? '#3775B9' : '#2C2925')};
       margin-left: 10px;
       width: 40px;
+      padding: 0px 0px 0px 0px;
+    `}
+
+  ${(props) =>
+    props.singleton &&
+    css`
+      @media only screen and (min-width: 1000px) {
+        padding: 10px 1px 0px 0px;
+      }
     `}
 `
 
@@ -182,7 +238,7 @@ const DeskNumbers = styled.div`
   @media (min-width: 1000px) {
     display: flex;
     align-items: center;
-    width: 150px;
+    width: ${(props) => (props.singletonWith ? '183px' : '150px')};
   }
 `
 const DeskMarkers = styled.div`
@@ -195,6 +251,13 @@ const DeskMarkers = styled.div`
     margin-left: 105px;
     margin-bottom: 5px;
   }
+  ${(props) =>
+    props.singleton &&
+    css`
+      @media only screen and (min-width: 1000px) {
+        width: 84%;
+      }
+    `}
 `
 const Marker = styled.span`
   display: none;
@@ -224,6 +287,7 @@ const TableButton = styled.button`
   margin-top: 45px;
   border-radius: 5px;
   margin-bottom: 45px;
+  cursor: pointer;
 
   @media (min-width: 1000px) {
     margin-top: 25px;

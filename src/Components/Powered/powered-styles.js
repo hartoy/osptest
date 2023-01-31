@@ -37,6 +37,13 @@ const StyledUl = styled.ul`
     width: 55%;
   }
 `
+const GraphicDiv = styled.div`
+  height: 100%;
+  width: 100%;
+  @media (min-width: 1000px) {
+    margin-top: 355px;
+  }
+`
 
 const StyledLi = styled.li`
   position: relative;
@@ -60,4 +67,4 @@ const StyledLi = styled.li`
     margin-bottom: 10px;
   }
 `
-export { PoweredStyles, StyledLi, StyledUl }
+export { PoweredStyles, StyledLi, StyledUl, GraphicDiv }

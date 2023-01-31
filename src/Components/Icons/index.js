@@ -21,6 +21,7 @@ import { PoweredGraphic } from './PoweredGraphic.js'
 import { TableGreenIcon } from './TableGreenIcon.js'
 import { TableGreyIcon } from './TableGreyIcon.js'
 import { SingletonRank } from './SingletonRank.js'
+import { ModalButton } from './ModalButton.js'
 
 const Icons = (props) => {
   const handleSvg = (name) => {
@@ -65,6 +66,8 @@ const Icons = (props) => {
         return <TableGreyIcon />
       case 'SingletonRank':
         return <SingletonRank />
+      case 'ModalButton':
+        return <ModalButton />
       default:
         return ''
     }

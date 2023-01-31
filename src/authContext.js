@@ -8,6 +8,7 @@ const API_GENOSHA = process.env.REACT_APP_API_GENOSHA
 export default function AuthContextProvider({ children }) {
   const [userData, setUserData] = useState()
   const [isLoading, setIsLoading] = useState(true)
+  const [cut, setCut] = useState(true)
 
   const logout = useCallback(function () {
     window.localStorage.removeItem('login', true)
@@ -45,8 +46,10 @@ export default function AuthContextProvider({ children }) {
       userData,
       setIsLoading,
       setUserData,
+      cut,
+      setCut,
     }),
-    [logout, isLoading, userData, setIsLoading, setUserData]
+    [logout, isLoading, userData, setIsLoading, setUserData, cut, setCut]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

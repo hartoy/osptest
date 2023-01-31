@@ -3,13 +3,16 @@ import { useParams } from 'react-router-dom'
 import { getSingletonTitleId } from '../../services/index.js'
 import { Link } from 'react-router-dom'
 import Spinner from '../Spinner/index'
-
+import TableComp from '../Table/index'
+import SingletonGraphic from '../Singleton/GraphicSingleton/index'
+import Modal from '../Modal/index'
+import Icons from '../Icons/index'
+import { useAuthContext } from '../../authContext'
 import {
   SWrapper,
   Primary,
   Box,
   TableButton,
-  color,
   Text,
   MiniBox,
   Number,
@@ -26,18 +29,37 @@ import {
   Deskstats,
   EeachStat,
   GoTo,
+  ButtonWrapper,
+  ModalWrapper,
+  ModalButton,
+  ButtonTableWrapper,
+  SingletonButton,
 } from './singleton-styles'
 
 import { Title } from '../Title/title-styles'
 import asigmentImg from '../Singleton/singleton-asigment.jpg'
-import asigmentGraImg from '../Singleton/singleton-graphic.jpg'
 import asigmentMapImg from '../Singleton/singleton-map.jpg'
-import portada from '../Singleton/portada.jpg'
 import Icon from '../Icons'
 
 export default function SingletonBox() {
   const params = useParams()
   const [data, setData] = useState([])
+  const [dataGraphic, setDataGraphic] = useState([])
+  const [open, setOpen] = useState(false)
+  const { cut, setCut } = useAuthContext()
+  const [tableData, setTableData] = useState([])
+  const [tableData2, setTableData2] = useState([])
+
+  const [changeTable, setChangeTable] = useState(false)
+
+  const ManageModal = () => {
+    setOpen(!open)
+    setCut(!cut)
+  }
+
+  const ChangeTable = () => {
+    setChangeTable(!changeTable)
+  }
 
   useEffect(() => {
     const token = localStorage.getItem('access')
@@ -48,6 +70,9 @@ export default function SingletonBox() {
     getSingletonTitleId(config, params.id)
       .then((resp) => {
         setData(resp)
+        setDataGraphic(resp.citation_count_chart)
+        setTableData(resp.institutions.institutions.slice(0, 10))
+        setTableData2(resp.institutions.institutions.slice(11, 21))
       })
       .catch((error) => console.error(error))
   }, [])
@@ -61,6 +86,7 @@ export default function SingletonBox() {
           {console.log(data)}
           <Column al60>
             <Primary>
+              {console.log('data de la tabla', tableData)}
               <Link to="/revisions">
                 <TableButton primaryButton>Titles</TableButton>
               </Link>
@@ -117,6 +143,21 @@ export default function SingletonBox() {
                 </PrimaryStats>
               </PrimaryBody>
               <LongText>{data.description}</LongText>
+              <Title mobile marginTop="20px" marginBottom="15px">
+                MOST FREQUENTLY ASSIGNED AT
+              </Title>
+              <Title desktop fontSizeSmall textAlign="left" marginTop="30px" marginBottom="30px">
+                MOST FREQUENTLY ASSIGNED AT
+              </Title>
+              <ButtonTableWrapper>
+                <SingletonButton onClick={ChangeTable}>Titles</SingletonButton>
+                <SingletonButton onClick={ChangeTable}>Schools</SingletonButton>
+              </ButtonTableWrapper>
+              {changeTable ? (
+                <TableComp tableData={tableData} singleton />
+              ) : (
+                <TableComp tableData={tableData2} singleton />
+              )}
             </Primary>
           </Column>
           <Column>
@@ -192,12 +233,15 @@ export default function SingletonBox() {
             </Box>
             <Box>
               <Title mobile marginBottom="35px">
-                Appearances by Top Fields and Year
+                Appearances By Year
               </Title>
-              <Title desktop heightSingleton fontSizeSmall marginBottom="35px">
-                Appearances by Top Fields and Year
+              <Title desktop heightSingleton fontSizeSmall marginBottom="15px">
+                Appearances By Year
               </Title>
-              <Img src={asigmentGraImg}></Img>
+              <ButtonWrapper>
+                <Icon name="ModalButton" onClick={ManageModal} marginRight="25px" />
+              </ButtonWrapper>
+              <SingletonGraphic dataGraphic={dataGraphic} />
             </Box>
             <Box>
               <Title mobile marginBottom="35px">
@@ -209,6 +253,21 @@ export default function SingletonBox() {
               <Img src={asigmentMapImg}></Img>
             </Box>
           </Column>
+          {open ? (
+            <Modal>
+              <ButtonWrapper alingSelf="flex-end">
+                <ModalButton onClick={ManageModal}>X</ModalButton>
+              </ButtonWrapper>
+              <ModalWrapper modalWidth="60%" modalHeight="50%">
+                <Title desktop heightSingleton fontSizeSmall marginBottom="15px">
+                  Appearances By Year
+                </Title>
+                <SingletonGraphic dataGraphic={dataGraphic} />
+              </ModalWrapper>
+            </Modal>
+          ) : (
+            ''
+          )}
         </SWrapper>
       )}
     </>

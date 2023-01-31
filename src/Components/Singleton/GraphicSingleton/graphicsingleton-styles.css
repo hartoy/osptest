@@ -1,0 +1,44 @@
+.recharts-responsive-container {
+    width: 98% !important;
+    height: 100% !important;
+    margin-bottom: 20px !important;
+    margin-top: 0px;
+}
+
+.recharts-default-legend {
+    list-style-type: none;
+    display: flex;
+    font-family: Roboto, sans-serif;
+    font-size: 14px;
+    flex-wrap: wrap;
+}
+
+.recharts-wrapper {
+    width: 100% !important;
+}
+
+.recharts-legend-item {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-right: 45px !important;
+    margin-top: 10px !important;
+}
+
+.recharts-legend-wrapper {
+    left: 55px !important;
+    bottom: 0px !important;
+    margin-left: 5px;
+    margin-top: 5px !important
+}
+
+.recharts-surface {
+    margin-left: -32px;
+}
+
+@media (min-width: 1000px) {
+    .recharts-responsive-container {
+        height:100% !important;
+        width: 100% !important;
+    }
+}

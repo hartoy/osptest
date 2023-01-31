@@ -37,7 +37,6 @@ margin-top: 5px !important;
 @media (min-width: 1000px) {
     .recharts-responsive-container {
         width: 50% !important;
-        margin-top: 55px;
         height: 280px !important;
     }
 }

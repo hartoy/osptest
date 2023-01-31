@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { PoweredStyles, StyledLi, StyledUl } from './powered-styles.js'
+import { PoweredStyles, StyledLi, StyledUl, GraphicDiv } from './powered-styles.js'
 import { Title } from '../Title/title-styles'
 import PoweredBarChart from './PoweredBarChart/index'
 
@@ -10,8 +10,9 @@ const Powered = () => {
       <Title mobile width="300px" textAlign="center">
         POWERED BY THE OS DATASET
       </Title>
-
-      <PoweredBarChart />
+      <GraphicDiv>
+        <PoweredBarChart />
+      </GraphicDiv>
       <StyledUl>
         <Title desktop textAlign="left">
           POWERED BY THE OS DATASET

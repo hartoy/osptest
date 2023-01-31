@@ -21,12 +21,14 @@ const SWrapper = styled.div`
   padding-left: 15px;
   font-family: Roboto, sans-serif;
   margin-top: 110px;
+  background-color: white;
 
   @media (min-width: 992px) {
     width: 970px;
     margin-top: 140px;
     flex-direction: row;
     align-items: flex-start;
+    background-color: transparent;
   }
   @media (min-width: 1200px) {
     width: 1170px;
@@ -50,6 +52,7 @@ const Primary = styled.div`
     padding: 25px;
     margin: 12px 0px 12px 0px;
     border-radius: 5px;
+    background-color: white;
   }
 `
 const Column = styled.div`
@@ -108,6 +111,7 @@ const Box = styled.div`
     padding: 25px;
     margin: 12px 0px 12px 0px;
     border-radius: 5px;
+    background-color: white;
   }
 `
 const PrimaryAuthor = styled.h3`
@@ -241,6 +245,15 @@ const Text = styled.p`
       }
     `}
 `
+const ModalWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: ${(props) => props.modalHeight};
+  width: ${(props) => props.modalWidth};
+`
+
 const MiniBox = styled.div`
   padding-top: 12px;
   padding-bottom: 12px;
@@ -308,8 +321,62 @@ const Img = styled.img`
     css`
       @media (min-width: 1000px) {
         max-width: 190px;
+        max-height: 278px;
       }
     `}
+`
+const ButtonWrapper = styled.div`
+  display: none;
+  @media (min-width: 1000px) {
+    display: flex;
+    justify-content: right;
+    align-self: ${(props) => props.alingSelf};
+  }
+`
+
+const ModalButton = styled.button`
+  background-color: #3775b9;
+  color: white;
+  cursor: pointer;
+  border-radius: 50%;
+  height: 25px;
+  width: 25px;
+  border-style: none;
+  position: absolute;
+  top: 60px;
+`
+
+const SingletonButton = styled.button`
+  font-style: normal;
+  font-weight: 900;
+  font-size: 15px;
+  text-align: center;
+  color: #3775b9;
+  padding: 5px 5px 5px 5px;
+  margin-right: 10px;
+  margin-bottom: 20px;
+  background-color: white;
+  border-radius: 5px;
+  border-color: #3775b9;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  height: 42px;
+  cursor: pointer;
+  border-style: none;
+  border-style: solid;
+  border-color: #3775b9;
+
+  :focus {
+    background-color: #3775b9;
+    color: white;
+    border-color: #3775b9;
+    border-style: solid;
+  }
+`
+const ButtonTableWrapper = styled.div`
+  display: flex;
+  width: 100%;
+  justify-content: initial;
 `
 
 export {
@@ -334,4 +401,9 @@ export {
   Deskstats,
   EeachStat,
   GoTo,
+  ButtonWrapper,
+  ModalWrapper,
+  ModalButton,
+  ButtonTableWrapper,
+  SingletonButton,
 }

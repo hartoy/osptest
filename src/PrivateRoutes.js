@@ -14,7 +14,7 @@ export default function PrivateRoute() {
       headers: { Authorization: `Bearer ${token}` },
     }
     console.log('se esta validando el token en private routes')
-    Axios.get(`${API_GENOSHA}/api/v1/auth/me`, config)
+    Axios.get(`${API_GENOSHA}api/v1/auth/me`, config)
       .then((response) => {
         setUserData(response.data)
         setIsLoading(false)
