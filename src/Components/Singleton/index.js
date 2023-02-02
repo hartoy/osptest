@@ -6,6 +6,7 @@ import Spinner from '../Spinner/index'
 import TableComp from '../Table/index'
 import SingletonGraphic from '../Singleton/GraphicSingleton/index'
 import Modal from '../Modal/index'
+import Dropdown from '../Dropdown/index'
 import Icons from '../Icons/index'
 import { useAuthContext } from '../../authContext'
 import {
@@ -45,10 +46,12 @@ export default function SingletonBox() {
   const params = useParams()
   const [data, setData] = useState([])
   const [dataGraphic, setDataGraphic] = useState([])
+  const [dataGraphicNormalized, setDataGraphicNormalized] = useState([])
   const [open, setOpen] = useState(false)
   const { cut, setCut } = useAuthContext()
   const [tableData, setTableData] = useState([])
   const [tableData2, setTableData2] = useState([])
+  const { normalized, setNormalized } = useAuthContext()
 
   const [changeTable, setChangeTable] = useState(false)
 
@@ -71,6 +74,7 @@ export default function SingletonBox() {
       .then((resp) => {
         setData(resp)
         setDataGraphic(resp.citation_count_chart)
+        setDataGraphicNormalized(resp.citation_count_chart_normalized)
         setTableData(resp.institutions.institutions.slice(0, 10))
         setTableData2(resp.institutions.institutions.slice(11, 21))
       })
@@ -80,7 +84,9 @@ export default function SingletonBox() {
   return (
     <>
       {data.length === 0 ? (
-        <Spinner />
+        <SWrapper forSpinner>
+          <Spinner />
+        </SWrapper>
       ) : (
         <SWrapper>
           {console.log(data)}
@@ -189,7 +195,7 @@ export default function SingletonBox() {
               </Title>
               {Object.entries(data.syllabi.syllabi).map(([key, value]) => {
                 return (
-                  <MiniBox marginBottom="6px">
+                  <MiniBox marginBottom="6px" key={value.code}>
                     <Text bold style={{ color: '#3188D3' }}>
                       {value.code}
                     </Text>
@@ -214,7 +220,7 @@ export default function SingletonBox() {
               <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
                 {Object.entries(data.fields.fields).map(([key, value]) => {
                   return (
-                    <Text border>
+                    <Text border key={value.syllabus_count}>
                       <Number>{value.syllabus_count} </Number>
                       {value.display_name}
                     </Text>
@@ -232,16 +238,24 @@ export default function SingletonBox() {
               <Img src={asigmentImg}></Img>
             </Box>
             <Box>
-              <Title mobile marginBottom="35px">
+              <Title mobile marginBottom="55px">
                 Appearances By Year
               </Title>
-              <Title desktop heightSingleton fontSizeSmall marginBottom="15px">
+              <ButtonWrapper mobile>
+                <Dropdown />
+              </ButtonWrapper>
+              <Title desktop heightSingleton fontSizeSmall marginBottom="50px">
                 Appearances By Year
               </Title>
               <ButtonWrapper>
+                <Dropdown />
                 <Icon name="ModalButton" onClick={ManageModal} marginRight="25px" />
               </ButtonWrapper>
-              <SingletonGraphic dataGraphic={dataGraphic} />
+              {normalized ? (
+                <SingletonGraphic dataGraphic={dataGraphicNormalized} />
+              ) : (
+                <SingletonGraphic dataGraphic={dataGraphic} />
+              )}
             </Box>
             <Box>
               <Title mobile marginBottom="35px">
@@ -262,7 +276,11 @@ export default function SingletonBox() {
                 <Title desktop heightSingleton fontSizeSmall marginBottom="15px">
                   Appearances By Year
                 </Title>
-                <SingletonGraphic dataGraphic={dataGraphic} />
+                {normalized ? (
+                  <SingletonGraphic dataGraphic={dataGraphicNormalized} />
+                ) : (
+                  <SingletonGraphic dataGraphic={dataGraphic} />
+                )}
               </ModalWrapper>
             </Modal>
           ) : (

@@ -24,8 +24,8 @@ const Spin = styled.div`
   animation: spinner 1.5s linear infinite;
   margin: 0 auto;
   position: fixed;
-  top: 50%;
-  left: 40%;
+  top: 30%;
+  left: 45%;
 
   ${(props) =>
     props.forLogin &&
@@ -34,6 +34,7 @@ const Spin = styled.div`
       width: 5px;
       height: 5px;
       border-top: 10px solid white;
+      left:0%;
       }
     `}
 `

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
 
 import {
   NavbarButtons,
@@ -26,6 +27,7 @@ const Navbar = () => {
   const { logout } = useAuthContext()
   const { userData } = useAuthContext()
   const navigate = useNavigate()
+  const params = useParams()
 
   const changeColor = () => {
     if (window.scrollY >= 60) {
@@ -69,6 +71,7 @@ const Navbar = () => {
 
   return (
     <>
+      {console.log(window.location.pathname)}
       <NavContainer className="container">
         <MobileNavbar>
           <Icon name="NavbarImg" height="40px" />
@@ -184,19 +187,21 @@ const Navbar = () => {
                 <li onMouseEnter={() => setDeskMenuAbout(true)} onMouseLeave={() => setDeskMenuAbout(false)}>
                   About
                 </li>
-                <li>
-                  {userData !== undefined ? (
+                {userData !== undefined ? (
+                  <li onClick={() => logOut()}>
                     <button>
-                      <Icon name="NavbarMan" height="18px" width="18px" marginRight="10px" onClick={() => logOut()} />
+                      <Icon name="NavbarMan" height="18px" width="18px" marginRight="10px" />
                       LOGOUT
                     </button>
-                  ) : (
+                  </li>
+                ) : (
+                  <li onClick={() => goTomenu()}>
                     <button>
-                      <Icon name="NavbarMan" height="18px" width="18px" marginRight="10px" onClick={() => goTomenu()} />
+                      <Icon name="NavbarMan" height="18px" width="18px" marginRight="10px" />
                       LOGIN
                     </button>
-                  )}
-                </li>
+                  </li>
+                )}
               </ul>
             </NavbarButtons>
             <DeskExploreMenu deskMenuExplore={deskMenuExplore}>

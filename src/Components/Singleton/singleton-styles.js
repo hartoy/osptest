@@ -33,6 +33,12 @@ const SWrapper = styled.div`
   @media (min-width: 1200px) {
     width: 1170px;
   }
+
+  ${(props) =>
+    props.forSpinner &&
+    css`
+      height: 55vh;
+    `}
 `
 
 const Primary = styled.div`
@@ -103,6 +109,7 @@ const Box = styled.div`
   line-height: 16px;
   padding: 20px;
   box-sizing: border-box;
+  position: relative;
 
   @media (min-width: 1000px) {
     width: 100%;
@@ -331,7 +338,28 @@ const ButtonWrapper = styled.div`
     display: flex;
     justify-content: right;
     align-self: ${(props) => props.alingSelf};
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    z-index: 1;
+    width: 90%;
+    display: flex;
+    top: 75px;
+    align-items: flex-start;
   }
+
+  ${(props) =>
+    props.mobile &&
+    css`
+      display: block;
+      position: absolute;
+      z-index: 1;
+      top: 30px;
+      @media (min-width: 1000px) {
+        display: none;
+      }
+    `}
 `
 
 const ModalButton = styled.button`

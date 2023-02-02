@@ -50,6 +50,7 @@ const NavbarButtons = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    cursor: pointer;
   }
 
   @media (min-width: 1000px) {

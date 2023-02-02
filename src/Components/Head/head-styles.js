@@ -45,6 +45,7 @@ const Header = styled.div`
     width: 285px;
     height: 37px;
     margin-top: 15px;
+    cursor: pointer;
   }
 
   @media (min-width: 1000px) {

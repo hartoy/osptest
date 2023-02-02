@@ -53,6 +53,7 @@ const Login = (props) => {
             })
         } else if (resp.response.status >= 401) {
           setDenied(true)
+          setIsLoading(false)
         }
       })
       .catch((err) => console.log(err))
@@ -78,7 +79,7 @@ const Login = (props) => {
         />
 
         {isLoading ? (
-          <Button type="submit">
+          <Button forSpinner type="submit">
             <Spinner forLogin />
           </Button>
         ) : (

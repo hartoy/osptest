@@ -1,5 +1,5 @@
 import React from 'react'
-import './spinner.css'
+
 import { Spin, SpinnerWrapper } from './spinner-styles.js'
 
 export default function LoadingSpinner(props) {

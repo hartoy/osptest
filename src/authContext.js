@@ -9,6 +9,7 @@ export default function AuthContextProvider({ children }) {
   const [userData, setUserData] = useState()
   const [isLoading, setIsLoading] = useState(true)
   const [cut, setCut] = useState(true)
+  const [normalized, setNormalized] = useState(false)
 
   const logout = useCallback(function () {
     window.localStorage.removeItem('login', true)
@@ -48,8 +49,10 @@ export default function AuthContextProvider({ children }) {
       setUserData,
       cut,
       setCut,
+      normalized,
+      setNormalized,
     }),
-    [logout, isLoading, userData, setIsLoading, setUserData, cut, setCut]
+    [logout, isLoading, userData, setIsLoading, setUserData, cut, setCut, normalized, setNormalized]
   )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>

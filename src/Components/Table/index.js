@@ -68,8 +68,8 @@ const TableComp = ({ field, alignEnd, singleton, workTable, tableData }) => {
             </DeskMarkers>
             {fields.map((data, index) => {
               return (
-                <ToSingleton href={`/singleton/${data.id}`}>
-                  <TableItem value={index} alingItems key={data.rank}>
+                <ToSingleton key={data.rank} href={`/singleton/${data.id}`}>
+                  <TableItem value={index} alingItems>
                     <NumberDiv>
                       <TableNumber style={{ paddingTop: '10px' }}>{index + 1}</TableNumber>
                     </NumberDiv>
@@ -115,7 +115,7 @@ const TableComp = ({ field, alignEnd, singleton, workTable, tableData }) => {
             </DeskMarkers>
             {work.map((data, index) => {
               return (
-                <ToSingleton href={`/singleton/${data.id}`}>
+                <ToSingleton key={data.rank} href={`/singleton/${data.id}`}>
                   <TableItem value={index} key={data.rank}>
                     <NumberDiv>
                       <TableNumber>{data.rank}</TableNumber>
@@ -165,8 +165,8 @@ const TableComp = ({ field, alignEnd, singleton, workTable, tableData }) => {
             </DeskMarkers>
             {tableData.map((data, index) => {
               return (
-                <ToSingleton singleton href={`/singleton/${data.id}`}>
-                  <TableItem singleton value={index} alingItems key={data.index}>
+                <ToSingleton key={data.index} singleton href={`/singleton/${data.id}`}>
+                  <TableItem singleton value={index} alingItems>
                     <NumberDiv>
                       <TableNumber style={{ paddingTop: '10px' }}>{index + 1}</TableNumber>
                     </NumberDiv>

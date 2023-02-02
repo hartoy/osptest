@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 const LoginWrapper = styled.div`
   display: flex;
@@ -56,6 +56,16 @@ const Button = styled.button`
   margin-top: 0.6rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease-out;
+  box-sizing: border-box;
+  height: 37px;
+
+  ${(props) =>
+    props.forSpinner &&
+    css`
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    `}
 `
 const Denied = styled.p`
   color: #3775b9;
