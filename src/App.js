@@ -1,4 +1,5 @@
 import './App.css'
+import 'mapbox-gl/dist/mapbox-gl.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 
 import Footer from './Components/Footer/index'

@@ -8,6 +8,7 @@ import SingletonGraphic from '../Singleton/GraphicSingleton/index'
 import Modal from '../Modal/index'
 import Dropdown from '../Dropdown/index'
 import Icons from '../Icons/index'
+import MapComponent from '../Map/index.js'
 import { useAuthContext } from '../../authContext'
 import {
   SWrapper,
@@ -39,25 +40,26 @@ import {
 
 import { Title } from '../Title/title-styles'
 import asigmentImg from '../Singleton/singleton-asigment.jpg'
-import asigmentMapImg from '../Singleton/singleton-map.jpg'
 import Icon from '../Icons'
 
 export default function SingletonBox() {
   const params = useParams()
   const [data, setData] = useState([])
-  const [dataGraphic, setDataGraphic] = useState([])
-  const [dataGraphicNormalized, setDataGraphicNormalized] = useState([])
   const [open, setOpen] = useState(false)
   const { cut, setCut } = useAuthContext()
-  const [tableData, setTableData] = useState([])
-  const [tableData2, setTableData2] = useState([])
+  const [mapModal, setMapModal] = useState(true)
   const { normalized, setNormalized } = useAuthContext()
-
   const [changeTable, setChangeTable] = useState(false)
 
   const ManageModal = () => {
     setOpen(!open)
     setCut(!cut)
+  }
+
+  const ManageMapModal = () => {
+    setOpen(!open)
+    setMapModal(!mapModal)
+    console.log('valor mapModal', mapModal)
   }
 
   const ChangeTable = () => {
@@ -73,10 +75,6 @@ export default function SingletonBox() {
     getSingletonTitleId(config, params.id)
       .then((resp) => {
         setData(resp)
-        setDataGraphic(resp.citation_count_chart)
-        setDataGraphicNormalized(resp.citation_count_chart_normalized)
-        setTableData(resp.institutions.institutions.slice(0, 10))
-        setTableData2(resp.institutions.institutions.slice(11, 21))
       })
       .catch((error) => console.error(error))
   }, [])
@@ -89,10 +87,8 @@ export default function SingletonBox() {
         </SWrapper>
       ) : (
         <SWrapper>
-          {console.log(data)}
           <Column al60>
             <Primary>
-              {console.log('data de la tabla', tableData)}
               <Link to="/revisions">
                 <TableButton primaryButton>Titles</TableButton>
               </Link>
@@ -160,9 +156,9 @@ export default function SingletonBox() {
                 <SingletonButton onClick={ChangeTable}>Schools</SingletonButton>
               </ButtonTableWrapper>
               {changeTable ? (
-                <TableComp tableData={tableData} singleton />
+                <TableComp tableData={data.institutions.institutions.slice(0, 10)} singleton />
               ) : (
-                <TableComp tableData={tableData2} singleton />
+                <TableComp tableData={data.institutions.institutions.slice(11, 21)} singleton />
               )}
             </Primary>
           </Column>
@@ -252,36 +248,52 @@ export default function SingletonBox() {
                 <Icon name="ModalButton" onClick={ManageModal} marginRight="25px" />
               </ButtonWrapper>
               {normalized ? (
-                <SingletonGraphic dataGraphic={dataGraphicNormalized} />
+                <SingletonGraphic dataGraphic={data.citation_count_chart_normalized} />
               ) : (
-                <SingletonGraphic dataGraphic={dataGraphic} />
+                <SingletonGraphic dataGraphic={data.citation_count_chart} />
               )}
             </Box>
             <Box>
               <Title mobile marginBottom="35px">
                 Map (up to 200 schools shown)
               </Title>
-              <Title desktop heightSingleton fontSizeSmall marginBottom="35px">
+              <Title desktop heightSingleton fontSizeSmall marginBottom="55px">
                 Map (up to 200 schools shown)
               </Title>
-              <Img src={asigmentMapImg}></Img>
+              <ButtonWrapper style={{ justifyContent: 'end', top: '95px' }}>
+                <Icon name="ModalButton" onClick={ManageMapModal} marginRight="10px" />
+              </ButtonWrapper>
+              <MapComponent markers={data.institutions.institutions} />
             </Box>
           </Column>
           {open ? (
             <Modal>
-              <ButtonWrapper alingSelf="flex-end">
-                <ModalButton onClick={ManageModal}>X</ModalButton>
-              </ButtonWrapper>
-              <ModalWrapper modalWidth="60%" modalHeight="50%">
-                <Title desktop heightSingleton fontSizeSmall marginBottom="15px">
-                  Appearances By Year
-                </Title>
-                {normalized ? (
-                  <SingletonGraphic dataGraphic={dataGraphicNormalized} />
-                ) : (
-                  <SingletonGraphic dataGraphic={dataGraphic} />
-                )}
-              </ModalWrapper>
+              {!mapModal ? (
+                <>
+                  <ButtonWrapper alingSelf="flex-end">
+                    <ModalButton onClick={ManageMapModal}>X</ModalButton>
+                  </ButtonWrapper>
+                  <ModalWrapper modalWidth="100%" modalHeight="100%">
+                    <MapComponent markers={data.institutions.institutions} />
+                  </ModalWrapper>
+                </>
+              ) : (
+                <>
+                  <ButtonWrapper alingSelf="flex-end">
+                    <ModalButton onClick={ManageModal}>X</ModalButton>
+                  </ButtonWrapper>
+                  <ModalWrapper modalWidth="60%" modalHeight="50%">
+                    <Title desktop heightSingleton fontSizeSmall marginBottom="15px">
+                      Appearances By Year
+                    </Title>
+                    {normalized ? (
+                      <SingletonGraphic dataGraphic={data.citation_count_chart_normalized} />
+                    ) : (
+                      <SingletonGraphic dataGraphic={data.citation_count_chart} />
+                    )}
+                  </ModalWrapper>
+                </>
+              )}
             </Modal>
           ) : (
             ''
