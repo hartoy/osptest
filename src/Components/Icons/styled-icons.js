@@ -8,6 +8,7 @@ const IconStyles = styled.div`
   margin-top: ${(props) => props.marginTop || '0'};
   padding: ${(props) => props.padding || '0'};
   margin-bottom: ${(props) => props.marginBottom || '0'};
+  display: ${({ flex }) => (flex ? 'flex' : '')};
 
   ${(props) =>
     props.forMobile &&

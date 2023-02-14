@@ -12,6 +12,7 @@ import NotFoundComp from './Components/Pages/notfound'
 import SingletonPage from './Components/Pages/singleton'
 import PublicRoute from './PublicRoute'
 import PrivateRoute from './PrivateRoutes'
+import UpdateInfo from './Components/Pages/update-info'
 import AuthContextProvider from './authContext'
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
             <Route element={<PrivateRoute />}>
               <Route path="revisions" element={<Revisions />} />
               <Route path="singleton/:id" element={<SingletonPage />} />
+              <Route path="update-info" element={<UpdateInfo />} />
             </Route>
           </Routes>
         </BrowserRouter>

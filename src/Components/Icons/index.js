@@ -85,6 +85,7 @@ const Icons = (props) => {
       marginBottom={props.marginBottom}
       padding={props.padding}
       who={props.who}
+      flex={props.flex}
     >
       {handleSvg(props.name)}
     </IconStyles>

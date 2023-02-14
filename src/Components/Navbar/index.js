@@ -64,14 +64,12 @@ const Navbar = () => {
   }
 
   const logOut = () => {
-    logout()
-    navigate('/login')
+    navigate('/update-info')
     setClick(!click)
   }
 
   return (
     <>
-      {console.log(window.location.pathname)}
       <NavContainer className="container">
         <MobileNavbar>
           <Icon name="NavbarImg" height="40px" />
@@ -165,7 +163,7 @@ const Navbar = () => {
             {userData !== undefined ? (
               <button>
                 <Icon name="NavbarMan" height="18px" marginRight="5px" onClick={() => logOut()} />
-                LOGOUT
+                ACCOUNT
               </button>
             ) : (
               <button>
@@ -191,7 +189,7 @@ const Navbar = () => {
                   <li onClick={() => logOut()}>
                     <button>
                       <Icon name="NavbarMan" height="18px" width="18px" marginRight="10px" />
-                      LOGOUT
+                      ACCOUNT
                     </button>
                   </li>
                 ) : (
