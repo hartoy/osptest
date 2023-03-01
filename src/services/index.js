@@ -26,6 +26,11 @@ export const getSingletonTitleId = async (config, id) => {
   return response.data
 }
 
+export const getSingletonFieldsId = async (config, id) => {
+  let response = await Axios(`https://os-analytics-api-dev.opensyllabus.org/fields/${id}`, config)
+  return response.data
+}
+
 export const changeUserData = async (data, config) => {
   let response = await Axios.put(`https://os-analytics-api-dev.opensyllabus.org/api/v1/auth/me/update`, data, config)
   return response.data

@@ -24,9 +24,10 @@ import {
 import Icon from '../Icons'
 import { Title } from '../Title/title-styles'
 
-const TableComp = ({ field, alignEnd, singleton, workTable, tableData }) => {
+const TableComp = ({ field, alignEnd, singleton, workTable, tableData, singletonField }) => {
   const [work, setWork] = useState([])
   const [fields, setFields] = useState([])
+  const [workSingleton, setWorkSingleton] = useState([])
 
   useEffect(() => {
     const token = localStorage.getItem('access')
@@ -38,7 +39,6 @@ const TableComp = ({ field, alignEnd, singleton, workTable, tableData }) => {
     getWorkSearch(config)
       .then((resp) => {
         setWork(resp.works)
-        // console.log('respuesta de works', resp.works)
       })
       .catch((error) => console.error(error))
 
@@ -68,7 +68,7 @@ const TableComp = ({ field, alignEnd, singleton, workTable, tableData }) => {
             </DeskMarkers>
             {fields.map((data, index) => {
               return (
-                <ToSingleton key={data.rank} href={`/singleton/${data.id}`}>
+                <ToSingleton key={data.rank} href={`singleton/fields/${data.id}`}>
                   <TableItem value={index} alingItems>
                     <NumberDiv>
                       <TableNumber style={{ paddingTop: '10px' }}>{index + 1}</TableNumber>
@@ -174,26 +174,82 @@ const TableComp = ({ field, alignEnd, singleton, workTable, tableData }) => {
                       <ItemTitle singleton Bold>
                         {data.display_name}
                       </ItemTitle>
-
-                      {data.state ? (
-                        <ItemTitle singleton>
-                          {data.state}, {data.country.display_name}
-                        </ItemTitle>
-                      ) : (
-                        <ItemTitle singleton>{data.country.display_name}</ItemTitle>
-                      )}
+                      <ItemTitle singleton>
+                        {data.state}, {data.country.display_name}
+                      </ItemTitle>
                       <Line singleton mBot15 />
                       <MobileNumberDiv>
                         <MobileNumbers>
                           <Icon name="TableGreyIcon" marginRight="5px" />
-                          <ItemSpan>{data.syllabus_count.toLocaleString()}</ItemSpan>
+                          {data.syllabus_count !== undefined ? (
+                            <ItemSpan>{data.syllabus_count.toLocaleString()}</ItemSpan>
+                          ) : (
+                            ''
+                          )}
                         </MobileNumbers>
                         <MobileNumbers></MobileNumbers>
                       </MobileNumberDiv>
                     </TableText>
                     <DeskNumbers>
+                      {data.syllabus_count !== undefined ? (
+                        <TableNumber singleton desk style={{ width: '90%' }}>
+                          {data.syllabus_count.toLocaleString()}
+                        </TableNumber>
+                      ) : (
+                        ''
+                      )}
+                    </DeskNumbers>
+                  </TableItem>
+                </ToSingleton>
+              )
+            })}
+            <TableButton>Show More</TableButton>
+          </Table>
+        </TableStyles>
+      ) : (
+        ''
+      )}
+      {singletonField ? (
+        <TableStyles alignEnd={alignEnd}>
+          <Table singleton>
+            <DeskMarkers style={{ marginLeft: '0px', width: '100%' }}>
+              <Marker style={{ marginLeft: '24px', marginRight: '40px' }}>Rank</Marker>
+              <Marker marginRight="10px" width="360px">
+                Titles
+              </Marker>
+              <Marker style={{ marginRight: '15px' }}>Appareances</Marker>
+              <Marker>Score</Marker>
+            </DeskMarkers>
+            {tableData.map((data, index) => {
+              return (
+                <ToSingleton key={data.index} singleton href={`/singleton/${data.id}`}>
+                  <TableItem singleton value={index} alingItems>
+                    <NumberDiv>
+                      <TableNumber style={{ paddingTop: '10px' }}>{index + 1}</TableNumber>
+                    </NumberDiv>
+                    <TableText>
+                      <ItemTitle singleton Bold>
+                        {data.display_name.slice(0, 50)}
+                      </ItemTitle>
+                      <ItemTitle singleton>{data.authors[0].display_name}</ItemTitle>
+                      <Line singleton mBot15 />
+                      <MobileNumberDiv style={{ justifyContent: 'start' }}>
+                        <MobileNumbers style={{ marginRight: '20px' }}>
+                          <Icon name="SingletonRank" marginRight="5px" />
+                          {data.citation_count.toLocaleString('es-US')}
+                        </MobileNumbers>
+                        <MobileNumbers>
+                          <Icon name="TableGreyIcon" marginRight="5px" />
+                          {parseFloat(data.score.toFixed(2))}
+                        </MobileNumbers>
+                      </MobileNumberDiv>
+                    </TableText>
+                    <DeskNumbers>
                       <TableNumber singleton desk style={{ width: '90%' }}>
-                        {data.syllabus_count.toLocaleString()}
+                        {data.citation_count.toLocaleString('es-US')}
+                      </TableNumber>
+                      <TableNumber singleton desk style={{ width: '90%' }}>
+                        {parseFloat(data.score.toFixed(2))}
                       </TableNumber>
                     </DeskNumbers>
                   </TableItem>

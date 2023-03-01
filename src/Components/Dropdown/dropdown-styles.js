@@ -7,7 +7,11 @@ const DropdownContainer = styled.div`
   background-color: white;
   box-sizing: border-box;
   border: 1px solid rgb(149, 153, 158);
-  padding: 10px 10px;
+
+  @media (max-width: 1000px) {
+    position: absolute;
+    top: 35px;
+  }
 `
 
 const DropdownHeader = styled.div`
@@ -15,9 +19,15 @@ const DropdownHeader = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  color: #3775b9;
+  padding: 10px 10px;
+  border-bottom: 0.2px solid rgb(149, 153, 158);
 `
 
-const DropBody = styled.div``
+const DropBody = styled.div`
+  padding-left: 10px;
+  padding-bottom: 10px;
+`
 
 const DropItem = styled.div`
   cursor: pointer;

@@ -36,6 +36,15 @@ const Section = styled.div`
     `}
 
   ${(props) =>
+    props.forSingletons &&
+    css`
+      background-color: white;
+      @media (min-width: 1000px) {
+        background-color: #f4f5f9;
+      }
+    `}
+
+  ${(props) =>
     props.center &&
     css`
       @media (min-width: 992px) {

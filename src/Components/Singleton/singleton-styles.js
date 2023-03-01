@@ -39,6 +39,12 @@ const SWrapper = styled.div`
     css`
       height: 55vh;
     `}
+
+  ${(props) =>
+    props.fields &&
+    css`
+      margin-top: 30px;
+    `}
 `
 
 const Primary = styled.div`
@@ -78,6 +84,12 @@ const PrimaryBody = styled.div`
   @media (min-width: 1000px) {
     width: 100%;
   }
+
+  ${(props) =>
+    props.fields &&
+    css`
+      margin: 0px;
+    `}
 `
 const PrimaryStats = styled.div`
   display: flex;
@@ -97,6 +109,15 @@ const PrimaryStats = styled.div`
         display: flex;
         flex-direction: column;
       }
+    `}
+
+  ${(props) =>
+    props.fields &&
+    css`
+      flex-direction: row;
+      width: 100%;
+      justify-content: flex-start;
+      margin: 0px;
     `}
 `
 
@@ -149,7 +170,7 @@ const Deskstats = styled.div`
   @media (min-width: 1000px) {
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    justify-content: start;
   }
 `
 const EeachStat = styled.div`
@@ -206,6 +227,7 @@ const Stat = styled.p`
   font-size: 16px;
   line-height: 24px;
   color: ${(props) => (props.green ? '#9BD331' : '#3775B9')};
+  flex-direction: ${(props) => (props.column ? 'column' : 'row')}; ;
 `
 
 const Line = styled.div`
@@ -213,6 +235,14 @@ const Line = styled.div`
   height: 0.5px;
   background: #c8cfd7;
   margin-bottom: 15px;
+
+  ${(props) =>
+    props.mobile &&
+    css`
+      @media (min-width: 1000px) {
+        display: none;
+      }
+    `}
 `
 
 const Text = styled.p`
@@ -316,6 +346,7 @@ const TableButton = styled.button`
       letter-spacing: 0.11em;
       align-self: left;
       margin-bottom: 30px;
+      cursor: pointer;
     `}
 `
 const Img = styled.img`

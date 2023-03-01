@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { DropdownContainer, DropdownHeader, DropBody, DropItem, DropSpan } from './dropdown-styles'
 import { useAuthContext } from '../../authContext'
 
@@ -15,7 +15,7 @@ export default function Dropdown() {
 
   const toggleDropdown = () => {
     setOpen(!isOpen)
-    console.log('dropdown button clicked', isOpen)
+    console.log('valor de isOpen', isOpen)
   }
 
   const handleItemClick = (id) => {
@@ -23,15 +23,20 @@ export default function Dropdown() {
     setOpen(false)
     if (data[id].label === 'Normalized') {
       setNormalized(true)
-      console.log('valor normalized en button', normalized)
     } else {
       setNormalized(false)
     }
   }
 
+  useEffect(() => {
+    console.log('valor de isOpen cuando se monta', isOpen)
+  }, [isOpen])
+
   return (
     <DropdownContainer>
-      <DropdownHeader onClick={toggleDropdown}>{selectedItem}</DropdownHeader>
+      <DropdownHeader isOpen onClick={toggleDropdown}>
+        {selectedItem}
+      </DropdownHeader>
       {!isOpen ? (
         ''
       ) : (

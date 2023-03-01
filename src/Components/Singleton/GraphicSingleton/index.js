@@ -24,8 +24,8 @@ export default function SingletonGraphic({ dataGraphic }) {
           height={300}
           data={propsData}
           margin={{
-            top: 20,
-            left: 20,
+            top: 25,
+            left: 0,
             bottom: 5,
           }}
         >

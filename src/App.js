@@ -10,6 +10,7 @@ import Revisions from './Components/Pages/revisions'
 import LoginComp from './Components/Pages/login'
 import NotFoundComp from './Components/Pages/notfound'
 import SingletonPage from './Components/Pages/singleton'
+import FieldSingletonPage from './Components/Pages/field-singleton'
 import PublicRoute from './PublicRoute'
 import PrivateRoute from './PrivateRoutes'
 import UpdateInfo from './Components/Pages/update-info'
@@ -31,6 +32,7 @@ function App() {
               <Route path="revisions" element={<Revisions />} />
               <Route path="singleton/:id" element={<SingletonPage />} />
               <Route path="update-info" element={<UpdateInfo />} />
+              <Route path="singleton/fields/:id" element={<FieldSingletonPage />} />
             </Route>
           </Routes>
         </BrowserRouter>
