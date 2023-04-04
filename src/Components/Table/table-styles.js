@@ -29,12 +29,13 @@ const TableStyles = styled.div`
     display: flex;
     justify-content: space-around;
     align-items: ${(props) => (props.alignEnd ? 'end' : '')};
+    width: 100%;
+
+    margin-right: ${(props) => props.marginRight};
+    margin-left: ${(props) => props.marginLeft};
   }
 
-  @media (min-width: 992px) {
-    max-width: 970px;
-  }
-  @media (min-width: 1200px) {
+  @media (min-width: 1000px) {
     max-width: 1170px;
   }
 `
@@ -45,7 +46,7 @@ const Table = styled.ul`
   list-style: none;
   margin: ${(props) => (props.singleton ? '' : '0 auto')};
   padding-inline-start: 0;
-  width: 300px;
+  width: 100%;
 
   @media (min-width: 1000px) {
     background: #ffffff;
@@ -56,6 +57,8 @@ const Table = styled.ul`
     padding-left: 0px;
     margin-right: 0px;
     margin-left: 0px;
+    height: 100%;
+    width: 100%;
   }
 
   ${(props) =>
@@ -74,22 +77,30 @@ const Table = styled.ul`
         box-shadow: none;
       }
     `}
+
+   ${(props) =>
+    props.bigTable &&
+    css`
+      width: 100%;
+      @media only screen and (min-width: 1000px) {
+        box-shadow: none;
+      }
+    `}
 `
 const TableItem = styled.li`
   display: flex;
   background-color: ${(props) => (props.value % 2 === 0 ? '#F6F6F6' : 'white')};
-  height: 140px;
+  padding: 12px 10px 12px 0px;
   box-sizing: border-box;
   padding: 3px 0px 14px 0px;
   border-radius: 5px;
-  width: ${(props) => (props.widTh90 ? '90%' : '102%')};
+  width: ${(props) => (props.widTh90 ? '90%' : '100%')};
+  min-width: 75px;
 
   @media (min-width: 1000px) {
     display: flex;
     flex-direction: row;
-    width: ${(props) => (props.widTh90 ? '90%' : '102%')};
-    height: 100px;
-    padding-bottom: 5px;
+    width: ${(props) => (props.widTh90 ? '90%' : '100%')};
     align-items: center;
   }
 
@@ -99,7 +110,22 @@ const TableItem = styled.li`
       @media only screen and (min-width: 1000px) {
         justify-content: space-between;
         align-items: center;
-        height: 75px;
+      }
+    `}
+
+  ${(props) =>
+    props.forSingleFields &&
+    css`
+      @media only screen and (min-width: 1000px) {
+        min-height: 81px;
+      }
+    `}
+
+    ${(props) =>
+    props.flexTable &&
+    css`
+      @media only screen and (min-width: 1000px) {
+        width: 100%;
       }
     `}
 `
@@ -107,13 +133,16 @@ const TableItem = styled.li`
 const Line = styled.div`
   height: 0.2px;
   border: 1px solid #d9d9d6;
-  width: 220px;
+  width: 90%;
   color: #d9d9d6;
-  margin-bottom: ${(props) => (props.mBot15 ? '15px' : '10px')};
+  margin-bottom: 15px;
   margin-top: 5px;
   background-color: #d9d9d6;
-  @media (min-width: 1000px) {
-    display: none;
+  display: none;
+
+  @media (max-width: 1000px) {
+    display: block;
+    margin-top: 10px;
   }
 
   ${(props) =>
@@ -121,29 +150,57 @@ const Line = styled.div`
     css`
       margin-top: 0px;
     `}
+
+  ${(props) =>
+    props.syllabyLine &&
+    css`
+      color: #3775b9;
+      border: 1px solid #3775b9;
+      margin-bottom: 0px;
+      display: block;
+    `}
 `
+
 const NumberDiv = styled.div`
   display: flex;
-  justify-content: end;
-  width: 40px;
-  padding-right: 10px;
+  align-items: center;
+  justify-content: center;
+  padding: 0px 5px 0px 5px;
+  min-width: 40px;
   @media (min-width: 1000px) {
     width: 45px;
   }
+
+  ${(props) =>
+    props.flexTable &&
+    css`
+      @media only screen and (min-width: 1000px) {
+        flex: 1 1 0%;
+      }
+    `}
 `
 
 const TableText = styled.div`
   display: flex;
   flex-direction: column;
+  width: 100%;
+
+  ${(props) =>
+    props.flexTable &&
+    css`
+      @media only screen and (min-width: 1000px) {
+        flex: 6 1 0%;
+      }
+    `}
 `
 
 const ItemTitle = styled.h3`
   font-weight: ${(props) => (props.Bold ? '600' : '400')};
   font-size: 18px;
-  line-height: 16px;
+  line-height: 18px;
   color: #405063;
   margin-bottom: 5px;
-  width: 205px;
+  width: 95%;
 
   @media (min-width: 1000px) {
     font-size: 16px;
@@ -158,6 +215,18 @@ const ItemTitle = styled.h3`
       @media only screen and (min-width: 1000px) {
         margin-bottom: 0px;
         margin-top: 10px;
+      }
+    `}
+  ${(props) =>
+    props.syllabiText &&
+    css`
+      height: ${(props) => (props.heightS ? '55px' : '')};
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      @media only screen and (min-width: 1000px) {
+        width: ${(props) => props.width};
+        height: ${(props) => (props.height ? props.height : 'auto')};
       }
     `}
 `
@@ -182,9 +251,8 @@ const TableNumber = styled.span`
   color: #3775b9;
   justify-content: center;
   align-items: top;
-  padding: 20px 1px 0px 0px;
   height: 20px;
-
+  padding-right: 10px;
   ${(props) =>
     props.desk &&
     css`
@@ -240,6 +308,14 @@ const DeskNumbers = styled.div`
     align-items: center;
     width: ${(props) => (props.singletonWith ? '183px' : '150px')};
   }
+
+  ${(props) =>
+    props.forCountriesFilter &&
+    css`
+      @media only screen and (min-width: 1000px) {
+        margin-right: 25px;
+      }
+    `}
 `
 const DeskMarkers = styled.div`
   display: none;
@@ -258,6 +334,15 @@ const DeskMarkers = styled.div`
         width: 84%;
       }
     `}
+
+  ${(props) =>
+    props.bigTable &&
+    css`
+      @media only screen and (min-width: 1000px) {
+        margin-left: 200px;
+        width: 90%;
+      }
+    `}
 `
 const Marker = styled.span`
   display: none;
@@ -271,6 +356,14 @@ const Marker = styled.span`
     width: ${(props) => props.width};
     margin-right: ${(props) => props.marginRight};
   }
+
+  ${(props) =>
+    props.bigTable &&
+    css`
+      @media only screen and (min-width: 1000px) {
+        width: 520px;
+      }
+    `}
 `
 
 const TableButton = styled.button`

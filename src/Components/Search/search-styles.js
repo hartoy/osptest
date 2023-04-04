@@ -46,6 +46,7 @@ const MobileSearch = styled.div`
     flex-direction: column;
     text-align: center;
     margin: 10px;
+    cursor: pointer;
   }
   span {
     color: #224974;
@@ -94,6 +95,7 @@ const DeskSearch = styled.div`
       padding: 8px 0px 8px 30px;
       margin-bottom: 16px;
       margin-top: 8px;
+      cursor: pointer;
     }
     p {
       display: flex;

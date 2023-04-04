@@ -150,9 +150,9 @@ export default function SingletonBox({ fields, titles }) {
                     <SingletonButton onClick={ChangeTable}>Schools</SingletonButton>
                   </ButtonTableWrapper>
                   {changeTable ? (
-                    <TableComp tableData={data.institutions.institutions.slice(0, 10)} singleton />
-                  ) : (
                     <TableComp tableData={data.works.works.slice(0, 10)} singletonField />
+                  ) : (
+                    <TableComp tableData={data.institutions.institutions.slice(0, 10)} singleton />
                   )}
                 </Primary>
               </Column>

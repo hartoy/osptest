@@ -9,6 +9,7 @@ const NavContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  z-index: 9999;
 
   @media (min-width: 1000px) {
     width: 750px;

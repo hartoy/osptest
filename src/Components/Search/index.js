@@ -4,9 +4,11 @@ import { SearchStyles, MobileSearch, DeskSearch } from './search-styles'
 import Icon from '../Icons'
 import { RevisionsTitle } from '../Title/title-styles'
 import { getDataSearch } from '../../services/index.js'
+import { useNavigate } from 'react-router-dom'
 
 const Search = (props) => {
   const [searchData, setSearchData] = useState([])
+  const navigate = useNavigate()
 
   useEffect(() => {
     getDataSearch()
@@ -16,6 +18,34 @@ const Search = (props) => {
 
   function nameIconMarker(key) {
     return key
+  }
+
+  const goTo = (data) => {
+    switch (data) {
+      case 'fields':
+        navigate('/fields')
+        break
+      case 'titles':
+        navigate('/titles')
+        break
+      case 'authors':
+        navigate('/authors')
+        break
+      case 'schools':
+        navigate('/schools')
+        break
+      case 'countries':
+        navigate('/countries')
+        break
+      case 'publishers':
+        navigate('/publishers')
+        break
+      case 'syllabi':
+        navigate('/syllaby')
+        break
+      default:
+        navigate('/revisions')
+    }
   }
 
   return (
@@ -28,7 +58,7 @@ const Search = (props) => {
           <ul style={{ marginTop: '24px' }}>
             {Object.entries(searchData).map(([key, value]) => {
               return (
-                <li key={key}>
+                <li key={key} onClick={() => goTo(key)}>
                   <Icon name={nameIconMarker(key)} height="100%" />
                   <span>{key}</span>
                 </li>
@@ -43,7 +73,7 @@ const Search = (props) => {
           <ul>
             {Object.entries(searchData).map(([key, value]) => {
               return (
-                <li key={key}>
+                <li key={key} onClick={() => goTo(key)}>
                   <Icon name={nameIconMarker(key)} marginRight="18px" />
                   <p>
                     {key}

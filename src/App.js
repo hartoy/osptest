@@ -13,6 +13,13 @@ import SingletonPage from './Components/Pages/singleton'
 import FieldSingletonPage from './Components/Pages/field-singleton'
 import PublicRoute from './PublicRoute'
 import PrivateRoute from './PrivateRoutes'
+import FieldFilterPage from './Components/Pages/field-filter-page'
+import CountriesFilterPage from './Components/Pages/countries-filter-page'
+import PublishersFilterPage from './Components/Pages/publishers-filter-page'
+import SchoolsFilterPage from './Components/Pages/schools-filter-page'
+import AuthorsFilterPage from './Components/Pages/authors-filter-page'
+import TitlesFilterPage from './Components/Pages/titles-filter-page'
+import SyllabyFilterPage from './Components/Pages/syllabi-filter-page'
 import UpdateInfo from './Components/Pages/update-info'
 import AuthContextProvider from './authContext'
 
@@ -32,6 +39,13 @@ function App() {
               <Route path="revisions" element={<Revisions />} />
               <Route path="singleton/:id" element={<SingletonPage />} />
               <Route path="update-info" element={<UpdateInfo />} />
+              <Route path="fields" element={<FieldFilterPage />} />
+              <Route path="syllaby" element={<SyllabyFilterPage />} />
+              <Route path="titles" element={<TitlesFilterPage />} />
+              <Route path="authors" element={<AuthorsFilterPage />} />
+              <Route path="schools" element={<SchoolsFilterPage />} />
+              <Route path="publishers" element={<PublishersFilterPage />} />
+              <Route path="countries" element={<CountriesFilterPage />} />
               <Route path="singleton/fields/:id" element={<FieldSingletonPage />} />
             </Route>
           </Routes>
